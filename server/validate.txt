@@ -1,0 +1,393 @@
+{
+    "inputs": {
+        "1": {
+            "1": "[[1,2],[3,4]]"
+        },
+        "2": {
+            "1": "[[3,4],[5,6]]"
+        }
+    },
+    "outputs": {
+        "1": {
+            "1": "[[1,3],[2,4]]"
+        },
+        "2": {
+            "1": "[[0,0],[0,0]]"
+        }
+    },
+    "solutions": {
+        "solution0": "tf.transpose(in1)",
+        "solution1": "tf.cast(tf.transpose(tf.cast(in1, tf.float32)), tf.int32)",
+        "solution2": "tf.argsort(in1, in1)"
+    }
+}
+{
+    "example0": {
+        "solution0": {
+            "match": true,
+            "exception": false,
+            "eval_output": "tf.int32:[[1, 3], [2, 4]]",
+            "graphs": {
+                "nodes": {
+                    "n0": {
+                        "type": "intermediate",
+                        "value": "[[1, 3], [2, 4]]",
+                        "label": "tf.transpose(in1)"
+                    },
+                    "n1": {
+                        "type": "input",
+                        "value": "[[1, 2], [3, 4]]",
+                        "label": "in1"
+                    },
+                    "p0": {
+                        "value": "tf.transpose(a)",
+                        "docstring": "Transposes `a`, where `a` is a Tensor."
+                    }
+                },
+                "edges": [
+                    {
+                        "start": "p0",
+                        "end": "n0"
+                    },
+                    {
+                        "start": "n1",
+                        "end": "p0",
+                        "label": "a"
+                    }
+                ],
+                "trace_edges": {
+                    "n0": [
+                        {
+                            "start": "n1",
+                            "is_value_wise": false,
+                            "description": "",
+                            "provenance": "[[0], [2], [1], [3]]"
+                        }
+                    ]
+                }
+            }
+        },
+        "solution1": {
+            "match": true,
+            "exception": false,
+            "eval_output": "tf.int32:[[1, 3], [2, 4]]",
+            "graphs": {
+                "nodes": {
+                    "n0": {
+                        "type": "intermediate",
+                        "value": "[[1, 3], [2, 4]]",
+                        "label": "tf.cast(tf.transpose(tf.cast(in1, tf.float32)), tf.int32)"
+                    },
+                    "n1": {
+                        "type": "intermediate",
+                        "value": "[[1.0, 3.0], [2.0, 4.0]]",
+                        "label": "tf.transpose(tf.cast(in1, tf.float32))"
+                    },
+                    "n2": {
+                        "type": "intermediate",
+                        "value": "[[1.0, 2.0], [3.0, 4.0]]",
+                        "label": "tf.cast(in1, tf.float32)"
+                    },
+                    "n3": {
+                        "type": "input",
+                        "value": "[[1, 2], [3, 4]]",
+                        "label": "in1"
+                    },
+                    "n4": {
+                        "type": "constant",
+                        "value": "tf.float32",
+                        "label": "tf.float32"
+                    },
+                    "n5": {
+                        "type": "constant",
+                        "value": "tf.int32",
+                        "label": "tf.int32"
+                    },
+                    "p0": {
+                        "value": "tf.cast(x, dtype)",
+                        "docstring": "Casts a tensor to a new type."
+                    },
+                    "p1": {
+                        "value": "tf.transpose(a)",
+                        "docstring": "Transposes `a`, where `a` is a Tensor."
+                    },
+                    "p2": {
+                        "value": "tf.cast(x, dtype)",
+                        "docstring": "Casts a tensor to a new type."
+                    }
+                },
+                "edges": [
+                    {
+                        "start": "p0",
+                        "end": "n2"
+                    },
+                    {
+                        "start": "n3",
+                        "end": "p0",
+                        "label": "x"
+                    },
+                    {
+                        "start": "n4",
+                        "end": "p0",
+                        "label": "dtype"
+                    },
+                    {
+                        "start": "p1",
+                        "end": "n1"
+                    },
+                    {
+                        "start": "n2",
+                        "end": "p1",
+                        "label": "a"
+                    },
+                    {
+                        "start": "p2",
+                        "end": "n0"
+                    },
+                    {
+                        "start": "n1",
+                        "end": "p2",
+                        "label": "x"
+                    },
+                    {
+                        "start": "n5",
+                        "end": "p2",
+                        "label": "dtype"
+                    }
+                ],
+                "trace_edges": {
+                    "n2": [
+                        {
+                            "start": "n4",
+                            "is_value_wise": false,
+                            "description": "",
+                            "provenance": "[[0], [0], [0], [0]]"
+                        },
+                        {
+                            "start": "n3",
+                            "is_value_wise": false,
+                            "description": "",
+                            "provenance": "[[0], [1], [2], [3]]"
+                        }
+                    ],
+                    "n1": [
+                        {
+                            "start": "n2",
+                            "is_value_wise": false,
+                            "description": "",
+                            "provenance": "[[0], [2], [1], [3]]"
+                        }
+                    ],
+                    "n0": [
+                        {
+                            "start": "n5",
+                            "is_value_wise": false,
+                            "description": "",
+                            "provenance": "[[0], [0], [0], [0]]"
+                        },
+                        {
+                            "start": "n1",
+                            "is_value_wise": false,
+                            "description": "",
+                            "provenance": "[[0], [1], [2], [3]]"
+                        }
+                    ]
+                }
+            }
+        },
+        "solution2": {
+            "match": false,
+            "exception": true,
+            "eval_output": "axis must be a constant scalar",
+            "graphs": {
+                "nodes": null,
+                "edges": null,
+                "trace_edges": null
+            }
+        }
+    },
+    "example1": {
+        "solution0": {
+            "match": false,
+            "exception": false,
+            "eval_output": "tf.int32:[[3, 5], [4, 6]]",
+            "graphs": {
+                "nodes": {
+                    "n0": {
+                        "type": "intermediate",
+                        "value": "[[3, 5], [4, 6]]",
+                        "label": "tf.transpose(in1)"
+                    },
+                    "n1": {
+                        "type": "input",
+                        "value": "[[3, 4], [5, 6]]",
+                        "label": "in1"
+                    },
+                    "p0": {
+                        "value": "tf.transpose(a)",
+                        "docstring": "Transposes `a`, where `a` is a Tensor."
+                    }
+                },
+                "edges": [
+                    {
+                        "start": "p0",
+                        "end": "n0"
+                    },
+                    {
+                        "start": "n1",
+                        "end": "p0",
+                        "label": "a"
+                    }
+                ],
+                "trace_edges": {
+                    "n0": [
+                        {
+                            "start": "n1",
+                            "is_value_wise": false,
+                            "description": "",
+                            "provenance": "[[0], [2], [1], [3]]"
+                        }
+                    ]
+                }
+            }
+        },
+        "solution1": {
+            "match": false,
+            "exception": false,
+            "eval_output": "tf.int32:[[3, 5], [4, 6]]",
+            "graphs": {
+                "nodes": {
+                    "n0": {
+                        "type": "intermediate",
+                        "value": "[[3, 5], [4, 6]]",
+                        "label": "tf.cast(tf.transpose(tf.cast(in1, tf.float32)), tf.int32)"
+                    },
+                    "n1": {
+                        "type": "intermediate",
+                        "value": "[[3.0, 5.0], [4.0, 6.0]]",
+                        "label": "tf.transpose(tf.cast(in1, tf.float32))"
+                    },
+                    "n2": {
+                        "type": "intermediate",
+                        "value": "[[3.0, 4.0], [5.0, 6.0]]",
+                        "label": "tf.cast(in1, tf.float32)"
+                    },
+                    "n3": {
+                        "type": "input",
+                        "value": "[[3, 4], [5, 6]]",
+                        "label": "in1"
+                    },
+                    "n4": {
+                        "type": "constant",
+                        "value": "tf.float32",
+                        "label": "tf.float32"
+                    },
+                    "n5": {
+                        "type": "constant",
+                        "value": "tf.int32",
+                        "label": "tf.int32"
+                    },
+                    "p0": {
+                        "value": "tf.cast(x, dtype)",
+                        "docstring": "Casts a tensor to a new type."
+                    },
+                    "p1": {
+                        "value": "tf.transpose(a)",
+                        "docstring": "Transposes `a`, where `a` is a Tensor."
+                    },
+                    "p2": {
+                        "value": "tf.cast(x, dtype)",
+                        "docstring": "Casts a tensor to a new type."
+                    }
+                },
+                "edges": [
+                    {
+                        "start": "p0",
+                        "end": "n2"
+                    },
+                    {
+                        "start": "n3",
+                        "end": "p0",
+                        "label": "x"
+                    },
+                    {
+                        "start": "n4",
+                        "end": "p0",
+                        "label": "dtype"
+                    },
+                    {
+                        "start": "p1",
+                        "end": "n1"
+                    },
+                    {
+                        "start": "n2",
+                        "end": "p1",
+                        "label": "a"
+                    },
+                    {
+                        "start": "p2",
+                        "end": "n0"
+                    },
+                    {
+                        "start": "n1",
+                        "end": "p2",
+                        "label": "x"
+                    },
+                    {
+                        "start": "n5",
+                        "end": "p2",
+                        "label": "dtype"
+                    }
+                ],
+                "trace_edges": {
+                    "n2": [
+                        {
+                            "start": "n4",
+                            "is_value_wise": false,
+                            "description": "",
+                            "provenance": "[[0], [0], [0], [0]]"
+                        },
+                        {
+                            "start": "n3",
+                            "is_value_wise": false,
+                            "description": "",
+                            "provenance": "[[0], [1], [2], [3]]"
+                        }
+                    ],
+                    "n1": [
+                        {
+                            "start": "n2",
+                            "is_value_wise": false,
+                            "description": "",
+                            "provenance": "[[0], [2], [1], [3]]"
+                        }
+                    ],
+                    "n0": [
+                        {
+                            "start": "n5",
+                            "is_value_wise": false,
+                            "description": "",
+                            "provenance": "[[0], [0], [0], [0]]"
+                        },
+                        {
+                            "start": "n1",
+                            "is_value_wise": false,
+                            "description": "",
+                            "provenance": "[[0], [1], [2], [3]]"
+                        }
+                    ]
+                }
+            }
+        },
+        "solution2": {
+            "match": false,
+            "exception": true,
+            "eval_output": "axis must be a constant scalar",
+            "graphs": {
+                "nodes": null,
+                "edges": null,
+                "trace_edges": null
+            }
+        }
+    }
+}
