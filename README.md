@@ -1,4 +1,4 @@
-# INTENT: INteractive TENsor Transformation Synthesis
+# INTENT: <u>IN</u>teractive <u>TEN</u>sor <u>T</u>ransformation Synthesis
 INTENT is a novel interactive program synthesizer for tensor transformation. It enables end users to *interactively* decompose a complex data transformation task to simpler ones to be solved by a synthesizer.
 
 Overall, we make the following contributions:
@@ -53,8 +53,8 @@ $ cd ..
 $ cd server
 $ sh bin/INTENT_run.sh
 ```
-Then go to 'http://localhost:8000' in your browser (chrome recommended).
+Then go to http://localhost:8000 in your browser (chrome recommended).
 
 
 ## Credits
-The project was developed under the supervision of [Prof. Tianyi Zhang](https://tianyi-zhang.github.io/) at Purdue and [Prof. Xingyu Wang](https://web.eecs.umich.edu/~xwangsd/) at UMich. Special thanks to [Yitao Huang](https://github.com/Yitao-Huang) and [Lyubing Qiang](https://github.com/EvelynQiang) for their contributions to the first version of INTENT.
+The project was developed under the supervision of [Prof. Tianyi Zhang](https://tianyi-zhang.github.io/) at Purdue and [Prof. Xinyu Wang](https://web.eecs.umich.edu/~xwangsd/) at UMich. Special thanks to [Yitao Huang](https://github.com/Yitao-Huang) and [Lyubing Qiang](https://github.com/EvelynQiang) for their contributions to the first version of INTENT.
